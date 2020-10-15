@@ -13,10 +13,10 @@ namespace Bank
        
         
 
-        public SavingsAccount(double currentbalance) : base() 
+        public SavingsAccount(double balance, double interest) : base(balance, interest) 
         { 
             
-            if(currentbalance < 25)
+            if(balance < 25)
             {
                 status = Status.inactive;
             }

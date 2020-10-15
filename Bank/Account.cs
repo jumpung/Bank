@@ -38,10 +38,10 @@ namespace Bank
 
         }
 
-        public Account(double startingBalance, double currentBalance, double annualInterestRate)
+        public Account(double balance, double annualInterestRate)
         {
-            this.startingBalance = startingBalance;
-            this.currentBalance = currentBalance;
+            this.startingBalance = balance;
+            this.currentBalance = balance;
             this.annualInterestRate = annualInterestRate;
         }
 
