@@ -8,8 +8,15 @@ namespace Bank
 {
     class ChequingAccount: Account, IAccount
     {
+
+        public ChequingAccount(double balance, double interest) : base(balance, interest)
+        {
+        }
+
+
         public override void MakeWithdraw(double amount)
         {
+
             if(currentBalance - amount < 0)
             {
                 serviceCharge += 15;

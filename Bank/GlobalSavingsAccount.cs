@@ -9,7 +9,7 @@ namespace Bank
     class GlobalSavingsAccount: SavingsAccount, IExchangeable, IAccount
     {
         public GlobalSavingsAccount(double balance, double interest) : base(balance, interest)
-        {
+        {   
         }
 
         public double USValue(double rate)
