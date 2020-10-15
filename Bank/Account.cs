@@ -10,63 +10,84 @@ namespace Bank
 {
 
 
-    abstract class Account : IAccount   
+    abstract class Account : IAccount
     {
+        private double startingBalance; //Balance section
+        private double currentBalance;
 
-        private double Balance = 0;
-        private double Interest;
-        private double ServiceCharge;
-        private double AnnualInterestRate = 0.10;
-        private double MonthlyInterestRate;
-        private double MonthlyInterest;
-        private int NumberOfDeposits;
-        private int NumberOfWithdrawls;
-        double OriginalBalance;
-        double ServiceCharges;
-        public enum CurrentAccountStatus { Active, Inactive };
-        private double MonthlyCharge = 10.00;
-        //private double Deposit;
-        //private double Withdrawls;
-        
+        private int depositCount;       // Deposit section
+        private double totalDepositAmount;
 
-        public Account(double Balance, double AnnualInterestRate)
+        private int withdrawalCount;    // Withdrawal section
+        private double totalWithdrawalAmount;
+
+        private double annualInterestRate;
+        private double monthlyInterestRate;
+        private double monthlyInterest;
+        private double serviceCharge;
+
+        public enum Status
         {
-            this.Balance = Balance;
-            this.AnnualInterestRate = AnnualInterestRate;
+            active,
+            inactive
         }
+
+        public Account(double startingBalance, double currentBalance, double annualInterestRate)
+        {
+            this.startingBalance = startingBalance;
+            this.currentBalance = currentBalance;
+            this.annualInterestRate = annualInterestRate;
+        }
+
+        public virtual void MakeDeposit(double amount)
+        {
+            currentBalance += amount;
+            totalDepositAmount += amount;
+            depositCount++;
+        }
+
+        public virtual void MakeWithdrawl(double amount)
+        {
+            currentBalance -= amount;
+            totalWithdrawalAmount -= amount;
+            withdrawalCount++;
+        }
+
         public void CalculateInterest()
         {
-            MonthlyInterestRate = AnnualInterestRate/12;
-            MonthlyInterest = Balance * MonthlyInterestRate;
-            Balance = Balance + MonthlyInterest;
+            monthlyInterestRate = (annualInterestRate / 12);
+            monthlyInterest = currentBalance * monthlyInterestRate;
+            currentBalance = currentBalance + monthlyInterest;
         }
 
         public string CloseAndReport()
         {
-            double OriginalBalance = Balance;
-            Console.WriteLine(OriginalBalance);//original Balance
-
-            double NewBalance;
-            NewBalance = OriginalBalance - MonthlyCharge;
+            currentBalance -= serviceCharge;
             CalculateInterest();
-            Console.WriteLine("This is the new balance",(NewBalance));//new Balance
-            
-            Console.WriteLine("This is the percentage change",(NewBalance/OriginalBalance)*100);
-            NumberOfWithdrawls = 0;
-            NumberOfDeposits = 0;
-            MonthlyCharge = 0;
+
+            withdrawalCount = 0;
+            depositCount = 0;
+            serviceCharge = 0;
+
+            StringBuilder accountInfo = new StringBuilder();
+
+            accountInfo.Append("Previous balance: " + startingBalance);
+            accountInfo.AppendLine("New Balance: " + currentBalance);
+
+            double percentChange = (startingBalance / currentBalance) * 100;
+            accountInfo.AppendLine("Percent change: " + percentChange);
+
+            accountInfo.AppendLine("Monthly interest rate: " + monthlyInterestRate);
+            accountInfo.AppendLine("Monthly interest: " + monthlyInterest);
+            accountInfo.AppendLine("Current balance: " + currentBalance);
+
+
+            return accountInfo.ToString();
         }
 
-        public void MakeDeposit(double amount)
-        {
-            Balance = amount + Balance;
-            NumberOfDeposits++;
-        }
 
-        public void MakeWithdrawl(double amount)
-        {
-            Balance = amount - Balance;
-            NumberOfWithdrawls++;
-        }
+
+
     }
+
 }
