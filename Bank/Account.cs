@@ -25,7 +25,7 @@ namespace Bank
         protected double annualInterestRate;
         protected double monthlyInterestRate;
         protected double monthlyInterest;
-        protected double serviceCharge;
+        protected double serviceCharge = 5.00;
 
         public enum Status
         {
@@ -47,14 +47,14 @@ namespace Bank
         public virtual void MakeDeposit(double amount)
         {
             totalDepositAmount += amount;
-            CurrentBalance += amount;
+            CurrentBalance += totalDepositAmount;
             depositCount++;
         }
 
         public virtual void MakeWithdraw(double amount)
         {
             totalWithdrawalAmount -= amount;
-            CurrentBalance -= amount;
+            CurrentBalance -= totalWithdrawalAmount;
             withdrawalCount++;
         }
 
@@ -75,7 +75,7 @@ namespace Bank
             accountInfo.AppendLine("Previous Balance: " + StartingBalance + "$");
             accountInfo.AppendLine("New Balance: " + CurrentBalance + "$");
 
-            double percentChange = (StartingBalance / CurrentBalance) / 100;
+            double percentChange = (StartingBalance / CurrentBalance) * 100;
             accountInfo.AppendLine("Percent change: " + percentChange + "%");
 
             accountInfo.AppendLine("Monthly interest rate: " + monthlyInterestRate + "%");

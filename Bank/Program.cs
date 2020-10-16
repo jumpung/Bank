@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,20 +20,15 @@ namespace Bank
 
         public static void MainMenu()
         {
+            ShowMainMenu();
 
-            bool exit;
+            bool exit = false;
 
-            exit = false;
             try
             {
                 do
                 {
-                    Console.WriteLine("--------------------------------------------");
-                    Console.WriteLine("Main Menu");
-                    Console.WriteLine("A: Savings");
-                    Console.WriteLine("B: Checkings");
-                    Console.WriteLine("C: Global Savings");
-                    Console.WriteLine("Q: Exit");
+
 
                     switch (Console.ReadLine().ToUpper())
                     {
@@ -72,13 +68,7 @@ namespace Bank
         {
             SavingsAccount saving = new SavingsAccount(5.00, 0.03);
 
-            Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("Savings Menu");
-
-            Console.WriteLine("A: Deposit");
-            Console.WriteLine("B: Withdrawal");
-            Console.WriteLine("C: Close & Report");
-            Console.WriteLine("Q: Return to bank menu");
+            ShowSavingsAccountMenu();
 
             bool exit = false;
 
@@ -96,21 +86,25 @@ namespace Bank
                             Console.WriteLine("How much do you want to deposit?");
                             string a = Console.ReadLine();
 
-                            double depositamount = double.Parse(a);
-                            saving.MakeDeposit(depositamount);
+                            double depositAmount = double.Parse(a);
+                            saving.CurrentBalance += depositAmount;
+                            Console.WriteLine("You have deposited: " + depositAmount + "$");
 
                             Console.WriteLine("\nPress enter to continue");
-                            Console.ReadLine();
-                            SavingsMenu();
+                            ShowSavingsAccountMenu();
                             break;
 
                         case "B":
                             Console.WriteLine("--------------------------------------------");
                             Console.WriteLine("How much do you want to withdraw?");
-                            string b = Console.ReadLine();
-                            double withdrawalamount = double.Parse(b);
-                            saving.MakeWithdraw(withdrawalamount);
 
+                            string b = Console.ReadLine();
+                            double withdrawalAmount = double.Parse(b);
+
+                            saving.MakeWithdraw(saving.CurrentBalance);
+
+                            Console.WriteLine("\nPress enter to continue");
+                            ShowSavingsAccountMenu();
                             break;
 
                         case "C":
@@ -118,7 +112,7 @@ namespace Bank
                             Console.Write(saving.CloseAndReport());
                             Console.WriteLine("\nPress enter to continue");
                             Console.ReadLine();
-                            SavingsMenu();
+                            ShowSavingsAccountMenu();
                             break;
 
                         case "Q":
@@ -127,7 +121,9 @@ namespace Bank
                             break;
 
                         default:
-
+                            Console.WriteLine("--------------------------------------------");
+                            Console.WriteLine("Please select a valid option: ");
+                            ShowSavingsAccountMenu();
                             break;
                     }
                 } while (exit == false);
@@ -141,11 +137,7 @@ namespace Bank
         }
         public static void CheckingMenu()
         {
-            ChequingAccount chequing = new ChequingAccount(5.00, 0.03);
-            Console.WriteLine("A: Deposit");
-            Console.WriteLine("B: Withdrawal");
-            Console.WriteLine("C: Close & Report");
-            Console.WriteLine("Q: Return to bank menu");
+                        ChequingAccount chequing = new ChequingAccount(5.00, 0.03);
 
             switch (Console.ReadLine().ToUpper())
             {
@@ -181,15 +173,7 @@ namespace Bank
         {
             GlobalSavingsAccount global = new GlobalSavingsAccount(5.00, 0.03);
 
-            Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("Global Savings Account Menu\n");
-
-            Console.WriteLine("A: Deposit");
-            Console.WriteLine("B: Withdrawal");
-            Console.WriteLine("C: Close & Report");
-            Console.WriteLine("D: Report balance in USD");
-            Console.WriteLine("R: Return to bank menu");
-
+            ShowGlobalSavingsAccountMenu();
 
             bool exit = false;
 
@@ -246,8 +230,51 @@ namespace Bank
             {
                 Console.WriteLine("error");
             }
+        }
 
 
+        public static void ShowMainMenu()
+        {
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("Main Menu");
+            Console.WriteLine("A: Savings");
+            Console.WriteLine("B: Checkings");
+            Console.WriteLine("C: Global Savings");
+            Console.WriteLine("Q: Exit");
+        }
+        public static void ShowSavingsAccountMenu()
+        {
+
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("Savings Menu");
+
+            Console.WriteLine("A: Deposit");
+            Console.WriteLine("B: Withdrawal");
+            Console.WriteLine("C: Close & Report");
+            Console.WriteLine("Q: Return to bank menu");
+        }
+
+        public static void ShowChequingsAccountMenu()
+        {
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("Chequings Account Menu\n");
+
+            Console.WriteLine("A: Deposit");
+            Console.WriteLine("B: Withdrawal");
+            Console.WriteLine("C: Close & Report");
+            Console.WriteLine("Q: Return to bank menu");
+        }
+
+        public static void ShowGlobalSavingsAccountMenu()
+        {
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("Global Savings Account Menu\n");
+
+            Console.WriteLine("A: Deposit");
+            Console.WriteLine("B: Withdrawal");
+            Console.WriteLine("C: Close & Report");
+            Console.WriteLine("D: Report balance in USD");
+            Console.WriteLine("R: Return to bank menu");
         }
     }
 }
