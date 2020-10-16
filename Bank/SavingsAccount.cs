@@ -42,7 +42,7 @@ namespace Bank
         public override void MakeDeposit(double amount)
         {
  
-            if(status == Status.inactive && currentBalance + amount > 25)
+            if(status == Status.inactive && CurrentBalance + amount > 25)
             {
                 status = Status.active;
                 base.MakeDeposit(amount);

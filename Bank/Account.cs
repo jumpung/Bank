@@ -12,8 +12,8 @@ namespace Bank
 
     abstract class Account : IAccount
     {
-        public double startingBalance { get; set; } //Balance section
-        public double currentBalance { get; set; }
+        public double StartingBalance { get; set; } //Balance section
+        public double CurrentBalance { get; set; }
 
 
         protected int depositCount;       // Deposit section
@@ -40,48 +40,48 @@ namespace Bank
 
         public Account(double balance, double annualInterestRate)
         {
-            this.startingBalance = balance;
-            this.currentBalance = balance;
+            this.StartingBalance = balance;
+            this.CurrentBalance = balance;
             this.annualInterestRate = annualInterestRate;
         }
 
         public virtual void MakeDeposit(double amount)
         {
             totalDepositAmount += amount;
-            currentBalance += amount;
+            CurrentBalance += amount;
             depositCount++;
         }
 
         public virtual void MakeWithdraw(double amount)
         {
             totalWithdrawalAmount -= amount;
-            currentBalance -= amount;
+            CurrentBalance -= amount;
             withdrawalCount++;
         }
 
         public void CalculateInterest()
         {
             monthlyInterestRate = (annualInterestRate / 12);
-            monthlyInterest = currentBalance * monthlyInterestRate;
-            currentBalance += monthlyInterest;
+            monthlyInterest = CurrentBalance * monthlyInterestRate;
+            CurrentBalance += monthlyInterest;
         }
 
         public virtual string CloseAndReport()
         {
-            currentBalance -= serviceCharge;
+            CurrentBalance -= serviceCharge;
             CalculateInterest();
 
             StringBuilder accountInfo = new StringBuilder();
 
-            accountInfo.AppendLine("Previous Balance: " + startingBalance + "$");
-            accountInfo.AppendLine("New Balance: " + currentBalance + "$");
+            accountInfo.AppendLine("Previous Balance: " + StartingBalance + "$");
+            accountInfo.AppendLine("New Balance: " + CurrentBalance + "$");
 
-            double percentChange = (startingBalance / currentBalance) / 100;
+            double percentChange = (StartingBalance / CurrentBalance) / 100;
             accountInfo.AppendLine("Percent change: " + percentChange + "%");
 
             accountInfo.AppendLine("Monthly interest rate: " + monthlyInterestRate + "%");
             accountInfo.AppendLine("Monthly interest: " + monthlyInterest + "$");
-            accountInfo.AppendLine("Current balance: " + currentBalance + "$");
+            accountInfo.AppendLine("Current balance: " + CurrentBalance + "$");
 
             withdrawalCount = 0;
             depositCount = 0;

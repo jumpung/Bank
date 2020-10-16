@@ -14,7 +14,7 @@ namespace Bank
 
         public double USValue(double rate)
         {
-            return currentBalance * rate;
+            return CurrentBalance * rate;
         }
     }
 }

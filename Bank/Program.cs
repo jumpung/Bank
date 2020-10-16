@@ -80,8 +80,8 @@ namespace Bank
                         Console.WriteLine("--------------------------------------------");
                         Console.WriteLine("How much do you want to deposit?");
                         string a = Console.ReadLine();
-                        saving.currentBalance = double.Parse(a);
-                        saving.MakeDeposit(saving.currentBalance);
+                        saving.CurrentBalance = double.Parse(a);
+                        saving.MakeDeposit(saving.CurrentBalance);
                         break;
 
                     case "B":

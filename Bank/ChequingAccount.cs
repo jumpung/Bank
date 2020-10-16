@@ -17,7 +17,7 @@ namespace Bank
         public override void MakeWithdraw(double amount)
         {
 
-            if(currentBalance - amount < 0)
+            if(CurrentBalance - amount < 0)
             {
                 serviceCharge += 15;
                 Console.WriteLine("Withdrawal denied, not enough money in your current balance");
