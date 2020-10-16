@@ -10,8 +10,6 @@ namespace Bank
     class SavingsAccount : Account, IAccount
     {
         Status status;
-       
-        
 
         public SavingsAccount(double balance, double interest) : base(balance, interest) 
         { 
@@ -32,26 +30,30 @@ namespace Bank
             if(status == Status.inactive)
             {
                 Console.WriteLine("The account is inactive and currently has less than 25$");
+                Console.ReadLine();
             }
             else
             {
                 base.MakeWithdraw(amount);
-                Console.WriteLine("You have withdrawn: " + amount);
+                Console.WriteLine("You have withdrawn: " + amount + "$");
+                Console.ReadLine();
             }
         }
         public override void MakeDeposit(double amount)
         {
-            base.MakeDeposit(amount);
+ 
             if(status == Status.inactive && currentBalance + amount > 25)
             {
                 status = Status.active;
                 base.MakeDeposit(amount);
-                Console.WriteLine("You have deposited: " + amount);
+                Console.WriteLine("You have deposited: " + amount + "$");
+                Console.ReadLine();
             }
             else
             {
                 base.MakeDeposit(amount);
-                Console.WriteLine("You have deposited: " + amount);
+                Console.WriteLine("You have deposited: " + amount + "$");
+                Console.ReadLine();
             }
         }
 

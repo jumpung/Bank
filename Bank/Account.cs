@@ -47,15 +47,15 @@ namespace Bank
 
         public virtual void MakeDeposit(double amount)
         {
-            currentBalance += amount;
             totalDepositAmount += amount;
+            currentBalance += amount;
             depositCount++;
         }
 
         public virtual void MakeWithdraw(double amount)
         {
-            currentBalance -= amount;
             totalWithdrawalAmount -= amount;
+            currentBalance -= amount;
             withdrawalCount++;
         }
 
@@ -63,7 +63,7 @@ namespace Bank
         {
             monthlyInterestRate = (annualInterestRate / 12);
             monthlyInterest = currentBalance * monthlyInterestRate;
-            currentBalance = currentBalance + monthlyInterest;
+            currentBalance += monthlyInterest;
         }
 
         public virtual string CloseAndReport()
@@ -71,22 +71,21 @@ namespace Bank
             currentBalance -= serviceCharge;
             CalculateInterest();
 
-            withdrawalCount = 0;
-            depositCount = 0;
-            serviceCharge = 0;
-
             StringBuilder accountInfo = new StringBuilder();
 
-            accountInfo.Append("Previous balance: " + startingBalance + "$");
+            accountInfo.AppendLine("Previous Balance: " + startingBalance + "$");
             accountInfo.AppendLine("New Balance: " + currentBalance + "$");
 
-            double percentChange = (startingBalance / currentBalance) * 100;
+            double percentChange = (startingBalance / currentBalance) / 100;
             accountInfo.AppendLine("Percent change: " + percentChange + "%");
 
             accountInfo.AppendLine("Monthly interest rate: " + monthlyInterestRate + "%");
             accountInfo.AppendLine("Monthly interest: " + monthlyInterest + "$");
             accountInfo.AppendLine("Current balance: " + currentBalance + "$");
 
+            withdrawalCount = 0;
+            depositCount = 0;
+            serviceCharge = 0;
 
             return accountInfo.ToString();
         }

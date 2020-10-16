@@ -10,53 +10,56 @@ namespace Bank
     {
         static void Main(string[] args)
         {
-
-            ChequingAccount chequing = new ChequingAccount(5.00, 0.04);
-            GlobalSavingsAccount globalSavings = new GlobalSavingsAccount(5.00, 0.04);
-
-
             Console.WriteLine("Welcome to the bank, please pick one of the following options");
+
+            MainMenu();
+
+        }
+
+        public static void MainMenu()
+        {
+
+
+            bool exit = false;
             try
             {
-                MainMenu();
-                switch (Console.ReadLine().ToUpper())
+                do
                 {
-                    case "A":
-                        SavingsMenu();
-                        break;
-                    case "B":
-                        CheckingMenu();
-                        break;
-                    case "C":
-                        GlobalMenu();
-                        break;
-                    case "Q":
-                        Console.WriteLine("Thank you for using our bank, the program will now close");
-                        Console.ReadLine();
-                        break;
+                    Console.WriteLine("A: Savings");
+                    Console.WriteLine("B: Checkings");
+                    Console.WriteLine("C: GlobalSavings");
+                    Console.WriteLine("Q: Exit");
 
-
+                    switch (Console.ReadLine().ToUpper())
+                    {
+                        case "A":
+                            Console.WriteLine("--------------------------------------------");
+                            SavingsMenu();
+                            break;
+                        case "B":
+                            Console.WriteLine("--------------------------------------------");
+                            CheckingMenu();
+                            break;
+                        case "C":
+                            Console.WriteLine("--------------------------------------------");
+                            GlobalMenu();
+                            break;
+                        case "Q":
+                            Console.WriteLine("--------------------------------------------");
+                            Console.WriteLine("Thank you for using our bank, the program will now close");
+                            Console.ReadLine();
+                            exit = true;
+                            break;
+                    }
                 }
+                while (exit == false);
+
 
             }
             catch (Exception)
             {
                 Console.WriteLine("There was an error");
             }
-
-
-
-
-        }
-
-        public static void MainMenu()
-        {
-            Console.WriteLine("A: Savings");
-            Console.WriteLine("B: Checkings");
-            Console.WriteLine("C: GlobalSavings");
-            Console.WriteLine("Q: Exit");
-
-
         }
 
         public static void SavingsMenu()
@@ -67,34 +70,47 @@ namespace Bank
             Console.WriteLine("C: Close & Report");
             Console.WriteLine("Q: Return to bank menu");
 
-            switch (Console.ReadLine().ToUpper())
+            bool exit = false;
+
+            do
             {
-                case "A":
+                switch (Console.ReadLine().ToUpper())
+                {
+                    case "A":
+                        Console.WriteLine("--------------------------------------------");
+                        Console.WriteLine("How much do you want to deposit?");
+                        string a = Console.ReadLine();
+                        saving.currentBalance = double.Parse(a);
+                        saving.MakeDeposit(saving.currentBalance);
+                        break;
 
-                    string a = Console.ReadLine();
-                    double depositamount = double.Parse(a);
-                    saving.MakeDeposit(depositamount);
-                    break;
+                    case "B":
+                        Console.WriteLine("--------------------------------------------");
+                        Console.WriteLine("How much do you want to withdraw?");
+                        string b = Console.ReadLine();
+                        double withdrawalamount = double.Parse(b);
+                        saving.MakeWithdraw(withdrawalamount);
+                        break;
 
-                case "B":
+                    case "C":
+                        Console.WriteLine("--------------------------------------------");
+                        Console.Write(saving.CloseAndReport());
+                        Console.ReadLine();
+                        break;
 
-                    string b = Console.ReadLine();
-                    double withdrawalamount = double.Parse(b);
-                    saving.MakeWithdraw(withdrawalamount);
-                    break;
+                    case "Q":
+                        Console.WriteLine("--------------------------------------------");
+                        MainMenu();
+                        break;
 
-                case "C":
-                    saving.CloseAndReport();
-                    break;
+                    default:
+                        Console.WriteLine("--------------------------------------------");                  
+                        SavingsMenu();
+                        break;
+                }
+            } while (exit == false);
 
-                case "Q":
-                    MainMenu();
-                    break;
 
-                default:
-                    Console.WriteLine("Please enter the following options A, B, C, Q");
-                    break;
-            }
 
 
         }
@@ -123,7 +139,8 @@ namespace Bank
                     break;
 
                 case "C":
-                    chequing.CloseAndReport();
+                    chequing.CloseAndReport().ToString();
+                    Console.ReadLine();
                     break;
 
                 case "Q":
