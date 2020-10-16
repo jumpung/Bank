@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Bank
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the bank, please pick one of the following options");
+            Console.WriteLine("Welcome to the bank, please pick one of the following options\n");
 
             MainMenu();
 
@@ -19,38 +20,43 @@ namespace Bank
         public static void MainMenu()
         {
 
+            bool exit;
 
-            bool exit = false;
+            exit = false;
             try
             {
                 do
                 {
+                    Console.WriteLine("--------------------------------------------");
+                    Console.WriteLine("Main Menu");
                     Console.WriteLine("A: Savings");
                     Console.WriteLine("B: Checkings");
-                    Console.WriteLine("C: GlobalSavings");
+                    Console.WriteLine("C: Global Savings");
                     Console.WriteLine("Q: Exit");
 
                     switch (Console.ReadLine().ToUpper())
                     {
                         case "A":
-                            Console.WriteLine("--------------------------------------------");
                             SavingsMenu();
                             break;
                         case "B":
-                            Console.WriteLine("--------------------------------------------");
                             CheckingMenu();
                             break;
                         case "C":
-                            Console.WriteLine("--------------------------------------------");
                             GlobalMenu();
                             break;
                         case "Q":
-                            Console.WriteLine("--------------------------------------------");
                             Console.WriteLine("Thank you for using our bank, the program will now close");
                             Console.ReadLine();
-                            exit = true;
+                            System.Environment.Exit(1);
                             break;
+                        default:
+                            Console.WriteLine("Please select a valid option: \n");
+                            MainMenu();
+                            break;
+
                     }
+                    Console.ReadLine();
                 }
                 while (exit == false);
 
@@ -65,6 +71,10 @@ namespace Bank
         public static void SavingsMenu()
         {
             SavingsAccount saving = new SavingsAccount(5.00, 0.03);
+
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("Savings Menu");
+
             Console.WriteLine("A: Deposit");
             Console.WriteLine("B: Withdrawal");
             Console.WriteLine("C: Close & Report");
@@ -72,45 +82,60 @@ namespace Bank
 
             bool exit = false;
 
-            do
+            try
             {
-                switch (Console.ReadLine().ToUpper())
+                do
                 {
-                    case "A":
-                        Console.WriteLine("--------------------------------------------");
-                        Console.WriteLine("How much do you want to deposit?");
-                        string a = Console.ReadLine();
-                        saving.CurrentBalance = double.Parse(a);
-                        saving.MakeDeposit(saving.CurrentBalance);
-                        break;
+                    string input = Console.ReadLine();
 
-                    case "B":
-                        Console.WriteLine("--------------------------------------------");
-                        Console.WriteLine("How much do you want to withdraw?");
-                        string b = Console.ReadLine();
-                        double withdrawalamount = double.Parse(b);
-                        saving.MakeWithdraw(withdrawalamount);
-                        break;
+                   
+                    switch (input.ToUpper())
+                    {
+                        case "A":
+                            Console.WriteLine("--------------------------------------------");
+                            Console.WriteLine("How much do you want to deposit?");
+                            string a = Console.ReadLine();
 
-                    case "C":
-                        Console.WriteLine("--------------------------------------------");
-                        Console.Write(saving.CloseAndReport());
-                        Console.ReadLine();
-                        break;
+                            double depositamount = double.Parse(a);
+                            saving.MakeDeposit(depositamount);
 
-                    case "Q":
-                        Console.WriteLine("--------------------------------------------");
-                        MainMenu();
-                        break;
+                            Console.WriteLine("\nPress enter to continue");
+                            Console.ReadLine();
+                            SavingsMenu();
+                            break;
 
-                    default:
-                        Console.WriteLine("--------------------------------------------");                  
-                        SavingsMenu();
-                        break;
-                }
-            } while (exit == false);
+                        case "B":
+                            Console.WriteLine("--------------------------------------------");
+                            Console.WriteLine("How much do you want to withdraw?");
+                            string b = Console.ReadLine();
+                            double withdrawalamount = double.Parse(b);
+                            saving.MakeWithdraw(withdrawalamount);
 
+                            break;
 
+                        case "C":
+                            Console.WriteLine("--------------------------------------------");
+                            Console.Write(saving.CloseAndReport());
+                            Console.WriteLine("\nPress enter to continue");
+                            Console.ReadLine();
+                            SavingsMenu();
+                            break;
+
+                        case "Q":
+                            MainMenu();
+                            exit = true;
+                            break;
+
+                        default:
+
+                            break;
+                    }
+                } while (exit == false);
+
+            }catch(Exception)
+            {
+                Console.WriteLine("error");
+            }
 
 
         }
@@ -155,44 +180,74 @@ namespace Bank
         public static void GlobalMenu()
         {
             GlobalSavingsAccount global = new GlobalSavingsAccount(5.00, 0.03);
+
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("Global Savings Account Menu\n");
+
             Console.WriteLine("A: Deposit");
             Console.WriteLine("B: Withdrawal");
             Console.WriteLine("C: Close & Report");
             Console.WriteLine("D: Report balance in USD");
             Console.WriteLine("R: Return to bank menu");
 
-            switch (Console.ReadLine().ToUpper())
+
+            bool exit = false;
+
+            try
             {
-                case "A":
+                
+                do
+                {
+                    string input = Console.ReadLine();
 
-                    string a = Console.ReadLine();
-                    double depositamount = double.Parse(a);
-                    global.MakeDeposit(depositamount);
-                    break;
+                    switch (input.ToUpper())
+                    {
+                        case "A":
+                            Console.WriteLine("--------------------------------------------");
+                            Console.WriteLine("How much do you want to deposit?");
+                            string a = Console.ReadLine();
+                            double depositamount = double.Parse(a);
+                            global.MakeDeposit(depositamount);
+                            GlobalMenu();
+                            break;
 
-                case "B":
+                        case "B":
+                            Console.WriteLine("--------------------------------------------");
+                            string b = Console.ReadLine();
+                            double withdrawalamount = double.Parse(b);
+                            global.MakeWithdraw(withdrawalamount);
+                            break;
 
-                    string b = Console.ReadLine();
-                    double withdrawalamount = double.Parse(b);
-                    global.MakeWithdraw(withdrawalamount);
-                    break;
+                        case "C":
+                            Console.WriteLine("--------------------------------------------");
+                            Console.Write(global.CloseAndReport());
+                            Console.ReadLine();
+                            break;
 
-                case "C":
-                    global.CloseAndReport();
-                    break;
+                        case "D":
+                            Console.WriteLine("--------------------------------------------");
+                            Console.WriteLine("Balance in USD " + global.USValue(0.76) + "$");
+                            GlobalMenu();
+                            break;
 
-                case "D":
-                    global.USValue(0.76);
-                    break;
+                        case "R":
+                            MainMenu();
+                            break;
 
-                case "R":
-                    MainMenu();
-                    break;
-
-                default:
-                    Console.WriteLine("Please enter the following options A, B, C, Q");
-                    break;
+                        default:
+                            Console.WriteLine("--------------------------------------------");
+                            Console.WriteLine("Please select a valid option: ");
+                            GlobalMenu();
+                            break;
+                    }
+                } while (exit == false);
             }
+            catch (Exception)
+            {
+                Console.WriteLine("error");
+            }
+
+
         }
     }
 }

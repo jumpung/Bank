@@ -35,7 +35,6 @@ namespace Bank
 
         public Account()
         {
-
         }
 
         public Account(double balance, double annualInterestRate)
@@ -89,9 +88,6 @@ namespace Bank
 
             return accountInfo.ToString();
         }
-
-
-
 
     }
 

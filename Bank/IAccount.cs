@@ -8,7 +8,7 @@ namespace Bank
 {
     interface IAccount
     {
-        void MakeWithdraw (double amount);
+        void MakeWithdraw(double amount);
         void MakeDeposit(double amount);
         void CalculateInterest();
         string CloseAndReport();
