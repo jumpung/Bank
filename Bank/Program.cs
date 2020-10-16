@@ -99,7 +99,7 @@ namespace Bank
                             
 
                             depositAmount = double.Parse(a);
-                            saving.CurrentBalance += depositAmount;
+                            saving.MakeDeposit(depositAmount);
 
 
                             ShowSavingsAccountMenu();
@@ -123,7 +123,6 @@ namespace Bank
                             withdrawAmount = double.Parse(b);
                             saving.MakeWithdraw(withdrawAmount);
 
-                            Console.WriteLine("\nPress enter to continue");
                             ShowSavingsAccountMenu();
                             break;
 
@@ -162,6 +161,7 @@ namespace Bank
             ShowChequingsAccountMenu();
 
             bool exit = false;
+            
 
             try
             {
@@ -188,11 +188,14 @@ namespace Bank
                             }
 
                             chequing.MakeDeposit(depositAmount);
-
+                            
                             ShowChequingsAccountMenu();
                             break;
 
                         case "B":
+
+                            Console.WriteLine("--------------------------------------------");
+                            Console.WriteLine("How much do you want to withdraw?");
 
                             string b = Console.ReadLine();
                             double withdrawAmount;
@@ -204,12 +207,16 @@ namespace Bank
                                 b = Console.ReadLine();
                             }
 
+                            withdrawAmount = double.Parse(b);
+                            chequing.MakeWithdraw(withdrawAmount);
+
                             ShowChequingsAccountMenu();
                             break;
 
                         case "C":
                             Console.WriteLine("--------------------------------------------");
-                            Console.Write(chequing.CloseAndReport().ToString());
+                            Console.Write(chequing.CloseAndReport());
+                            Console.WriteLine("\nPress enter to continue");
                             Console.ReadLine();
                             ShowChequingsAccountMenu();
                             break;
@@ -220,10 +227,12 @@ namespace Bank
                             break;
 
                         default:
-                            Console.WriteLine("Please enter the following options A, B, C, Q");
+                            Console.WriteLine("--------------------------------------------");
+                            Console.WriteLine("Please select a valid option: ");
                             ShowChequingsAccountMenu();
                             break;
                     }
+                    Console.ReadLine();
 
                 } while (exit == false);
             }
@@ -273,6 +282,7 @@ namespace Bank
 
                         case "B":
                             Console.WriteLine("--------------------------------------------");
+                            Console.WriteLine("How much do you want to withdraw?");
 
                             string b = Console.ReadLine();
                             double withdrawAmount;
@@ -286,18 +296,23 @@ namespace Bank
 
                             double withdrawalamount = double.Parse(b);
                             global.MakeWithdraw(withdrawalamount);
+
+                            ShowGlobalSavingsAccountMenu();
                             break;
 
                         case "C":
                             Console.WriteLine("--------------------------------------------");
                             Console.Write(global.CloseAndReport());
+                            Console.WriteLine("\nPress enter to continue");
                             Console.ReadLine();
+
+                            ShowGlobalSavingsAccountMenu();
                             break;
 
                         case "D":
                             Console.WriteLine("--------------------------------------------");
                             Console.WriteLine("Balance in USD " + global.USValue(0.76) + "$");
-                            GlobalMenu();
+                            ShowGlobalSavingsAccountMenu();
                             break;
 
                         case "R":

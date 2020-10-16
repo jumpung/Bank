@@ -9,10 +9,16 @@ namespace Bank
 {
     class SavingsAccount : Account, IAccount
     {
-        Status status = Status.active;
+        Status status = Status.inactive;
 
         public SavingsAccount(double balance, double interest) : base(balance, interest) 
         {
+            if (balance < 25)
+            {
+                status = Status.inactive;
+            }
+            else
+                status = Status.active;
         }
         
         public override void MakeWithdraw(double amount)

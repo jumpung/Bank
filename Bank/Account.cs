@@ -47,14 +47,14 @@ namespace Bank
         public virtual void MakeDeposit(double amount)
         {
             totalDepositAmount += amount;
-            CurrentBalance += totalDepositAmount;
+            CurrentBalance += amount;
             depositCount++;
         }
 
         public virtual void MakeWithdraw(double amount)
         {
             totalWithdrawalAmount -= amount;
-            CurrentBalance += totalWithdrawalAmount;
+            CurrentBalance -= amount;
             withdrawalCount++;
         }
 
@@ -85,6 +85,7 @@ namespace Bank
 
             accountInfo.AppendLine("Monthly interest rate: " + monthlyInterestRate + "%");
             accountInfo.AppendLine("Monthly interest: " + monthlyInterest + "$");
+            accountInfo.AppendLine("Service charge: " + serviceCharge); 
             accountInfo.AppendLine("Current balance: " + CurrentBalance + "$");
 
             withdrawalCount = 0;

@@ -23,8 +23,12 @@ namespace Bank
                 Console.WriteLine("Withdrawal denied, not enough money in your current balance");
                 Console.WriteLine("15$ has been added to your monthly charge fee");
             }
-            base.MakeWithdraw(amount);
-            Console.WriteLine("You have withdrawn: " + amount);
+            else
+            {
+                base.MakeWithdraw(amount);
+                Console.WriteLine("You have withdrawn: " + amount);
+            }
+
         }
 
         public override void MakeDeposit(double amount)
