@@ -39,6 +39,7 @@ namespace Bank
 
         public Account(double balance, double annualInterestRate)
         {
+            this.StartingBalance = balnce;
             this.CurrentBalance = balance;
             this.annualInterestRate = annualInterestRate;
         }
