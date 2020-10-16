@@ -39,7 +39,7 @@ namespace Bank
 
         public Account(double balance, double annualInterestRate)
         {
-            this.StartingBalance = balnce;
+            this.StartingBalance = balance;
             this.CurrentBalance = balance;
             this.annualInterestRate = annualInterestRate;
         }
@@ -64,6 +64,10 @@ namespace Bank
             monthlyInterest = CurrentBalance * monthlyInterestRate;
             CurrentBalance += monthlyInterest;
         }
+        public double getPercentageChange() {
+            double percentChangeTotal = (StartingBalance / CurrentBalance);
+            return percentChangeTotal;
+        }
 
         public virtual string CloseAndReport()
         {
@@ -71,12 +75,13 @@ namespace Bank
             CalculateInterest();
 
             StringBuilder accountInfo = new StringBuilder();
+            
 
             accountInfo.AppendLine("Previous Balance: " + StartingBalance + "$");
             accountInfo.AppendLine("New Balance: " + CurrentBalance + "$");
 
-            double percentChange = (StartingBalance / CurrentBalance) * 100;
-            accountInfo.AppendLine("Percent change: " + percentChange + "%");
+            
+            accountInfo.AppendLine("Percent change: " + getPercentageChange() + "%");
 
             accountInfo.AppendLine("Monthly interest rate: " + monthlyInterestRate + "%");
             accountInfo.AppendLine("Monthly interest: " + monthlyInterest + "$");
@@ -88,6 +93,7 @@ namespace Bank
 
             return accountInfo.ToString();
         }
+        
 
     }
 
