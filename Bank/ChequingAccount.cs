@@ -22,16 +22,16 @@ namespace Bank
                 serviceCharge += 15;
                 Console.WriteLine("Withdrawal denied, not enough money in your current balance");
                 Console.WriteLine("15$ has been added to your monthly charge fee");
-                Console.ReadLine();
             }
             base.MakeWithdraw(amount);
             Console.WriteLine("You have withdrawn: " + amount);
-            Console.ReadLine();
         }
 
         public override void MakeDeposit(double amount)
         {
             base.MakeDeposit(amount);
+            Console.WriteLine("You have deposited: " + amount + "$");
+            Console.WriteLine("Curent balance: " + CurrentBalance + "$");
         }
 
         public override string ToString()

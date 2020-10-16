@@ -39,7 +39,6 @@ namespace Bank
 
         public Account(double balance, double annualInterestRate)
         {
-            this.StartingBalance = balance;
             this.CurrentBalance = balance;
             this.annualInterestRate = annualInterestRate;
         }
@@ -54,7 +53,7 @@ namespace Bank
         public virtual void MakeWithdraw(double amount)
         {
             totalWithdrawalAmount -= amount;
-            CurrentBalance -= totalWithdrawalAmount;
+            CurrentBalance += totalWithdrawalAmount;
             withdrawalCount++;
         }
 
