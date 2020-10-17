@@ -64,7 +64,7 @@ namespace Bank
             monthlyInterest = CurrentBalance * monthlyInterestRate;
             CurrentBalance += monthlyInterest;
         }
-        public double getPercentageChange() {
+        public double GetPercentageChange() {
             double percentChangeTotal = (StartingBalance / CurrentBalance);
             return percentChangeTotal;
         }
@@ -78,10 +78,10 @@ namespace Bank
             
 
             accountInfo.AppendLine("Previous Balance: " + StartingBalance + "$");
-            accountInfo.AppendLine("New Balance: " + CurrentBalance + "$");
+            accountInfo.AppendLine("New Balance: " + ToNamFormat.ToNAMoneyFormat(true, CurrentBalance) + "$");
 
             
-            accountInfo.AppendLine("Percent change: " + getPercentageChange() + "%");
+            accountInfo.AppendLine("Percent change: " + ToNamFormat.ToNAMoneyFormat(true, GetPercentageChange()) + "%");
 
             accountInfo.AppendLine("Monthly interest rate: " + monthlyInterestRate + "%");
             accountInfo.AppendLine("Monthly interest: " + monthlyInterest + "$");

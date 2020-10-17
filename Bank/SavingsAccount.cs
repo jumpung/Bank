@@ -26,8 +26,8 @@ namespace Bank
             if(status == Status.active)
             {
                 base.MakeWithdraw(amount);
-                Console.WriteLine("You have withdrawn: " + amount + "$");
-                Console.WriteLine("Current balance: " + CurrentBalance + "$");
+                Console.WriteLine("You have withdrawn: " + ToNamFormat.ToNAMoneyFormat(true, amount) + "$");
+                Console.WriteLine("Current balance: " + ToNamFormat.ToNAMoneyFormat(true, CurrentBalance) + "$");
 
             }
             else
@@ -42,7 +42,7 @@ namespace Bank
             if(status == Status.inactive && (CurrentBalance + amount) >= 25)
             {
                 base.MakeDeposit(amount);
-                Console.WriteLine("You have deposited: " + amount + "$");
+                Console.WriteLine("You have deposited: " + ToNamFormat.ToNAMoneyFormat(true, amount) + "$");
                 Console.WriteLine("Curent balance: " + CurrentBalance + "$");
                 status = Status.active;
             }

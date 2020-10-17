@@ -8,14 +8,17 @@ namespace Bank
 {
     public static class ToNamFormat
     {
-        public static string ToNAMoneyFormat(this double n, Boolean tf)
+        public static string ToNAMoneyFormat(bool tf, double n)
         {
-            if (tf == false)
+            if (tf == true)
             {
-                return n.ToString();
+                Math.Round(n, 2);
+
+                string formatted = n.ToString("C2");
+
+                return formatted.ToString();
             }
             else
-                Math.Round(n, 2);
             return n.ToString();
         }
     }
