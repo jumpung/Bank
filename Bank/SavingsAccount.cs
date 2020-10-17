@@ -43,14 +43,14 @@ namespace Bank
             {
                 base.MakeDeposit(amount);
                 Console.WriteLine("You have deposited: " + ToNamFormat.ToNAMoneyFormat(true, amount) + "$");
-                Console.WriteLine("Curent balance: " + CurrentBalance + "$");
+                Console.WriteLine("Curent balance: " + ToNamFormat.ToNAMoneyFormat(true, CurrentBalance) + "$");
                 status = Status.active;
             }
             else
             {
                 base.MakeDeposit(amount);
                 Console.WriteLine("You have deposited: " + ToNamFormat.ToNAMoneyFormat(true, amount) + "$");
-                Console.WriteLine("Curent balance: " + CurrentBalance + "$");
+                Console.WriteLine("Curent balance: " + ToNamFormat.ToNAMoneyFormat(true, CurrentBalance) + "$");
             }
         }
 
