@@ -25,7 +25,7 @@ namespace Bank
         protected double annualInterestRate;
         protected double monthlyInterestRate;
         protected double monthlyInterest;
-        protected double serviceCharge = 5.00;
+        protected double serviceCharge;
 
         public enum Status
         {
@@ -77,7 +77,7 @@ namespace Bank
             StringBuilder accountInfo = new StringBuilder();
             
 
-            accountInfo.AppendLine("Previous Balance: " + StartingBalance + "$");
+            accountInfo.AppendLine("Previous Balance: " + ToNamFormat.ToNAMoneyFormat(true, StartingBalance) + "$");
             accountInfo.AppendLine("New Balance: " + ToNamFormat.ToNAMoneyFormat(true, CurrentBalance) + "$");
 
             

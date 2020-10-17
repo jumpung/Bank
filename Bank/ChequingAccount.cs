@@ -27,6 +27,7 @@ namespace Bank
             {
                 base.MakeWithdraw(amount);
                 Console.WriteLine("You have withdrawn: " + amount);
+                Console.WriteLine("Curent balance: " + ToNamFormat.ToNAMoneyFormat(true, CurrentBalance) + "$");
             }
 
         }

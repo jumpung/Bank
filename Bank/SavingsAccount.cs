@@ -17,25 +17,29 @@ namespace Bank
             {
                 status = Status.inactive;
             }
-            else
+            else if(balance < 25)
+            {
                 status = Status.active;
+            }
+                
         }
-        
+
         public override void MakeWithdraw(double amount)
         {
-            if(status == Status.active)
+            if(status == Status.active && CurrentBalance < 25)
+            {
+                status = Status.inactive;
+                Console.WriteLine("The account is inactive and currently has less than 25$");
+                Console.WriteLine("Current balance: " + ToNamFormat.ToNAMoneyFormat(true, CurrentBalance) + "$");
+            }
+            else
             {
                 base.MakeWithdraw(amount);
                 Console.WriteLine("You have withdrawn: " + ToNamFormat.ToNAMoneyFormat(true, amount) + "$");
                 Console.WriteLine("Current balance: " + ToNamFormat.ToNAMoneyFormat(true, CurrentBalance) + "$");
-
-            }
-            else
-            {
-                Console.WriteLine("The account is inactive and currently has less than 25$");
-                Console.WriteLine("Current balance: " + CurrentBalance + "$");
             }
         }
+
         public override void MakeDeposit(double amount)
         {
  

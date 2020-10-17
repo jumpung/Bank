@@ -149,7 +149,7 @@ namespace Bank
 
             }catch(Exception)
             {
-                Console.WriteLine("error");
+                Console.WriteLine("Error, try again");
             }
 
 
@@ -238,7 +238,7 @@ namespace Bank
             }
             catch (Exception)
             {
-                Console.WriteLine("error");
+                Console.WriteLine("Error, try again");
             }
 
             
@@ -330,7 +330,7 @@ namespace Bank
             }
             catch (Exception)
             {
-                Console.WriteLine("error");
+                Console.WriteLine("Error, try again");
             }
         }
 
