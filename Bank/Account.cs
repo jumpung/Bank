@@ -33,9 +33,6 @@ namespace Bank
             inactive = 0
         }
 
-        public Account()
-        {
-        }
 
         public Account(double balance, double annualInterestRate)
         {

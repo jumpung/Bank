@@ -98,7 +98,6 @@ namespace Bank
                             }
                             
 
-                            depositAmount = double.Parse(a);
                             saving.MakeDeposit(depositAmount);
 
 
@@ -120,7 +119,6 @@ namespace Bank
                                 b = Console.ReadLine();
                             }
 
-                            withdrawAmount = double.Parse(b);
                             saving.MakeWithdraw(withdrawAmount);
 
                             ShowSavingsAccountMenu();
@@ -207,7 +205,6 @@ namespace Bank
                                 b = Console.ReadLine();
                             }
 
-                            withdrawAmount = double.Parse(b);
                             chequing.MakeWithdraw(withdrawAmount);
 
                             ShowChequingsAccountMenu();
@@ -275,8 +272,7 @@ namespace Bank
                                 a = Console.ReadLine();
                             }
 
-                            double depositamount = double.Parse(a);
-                            global.MakeDeposit(depositamount);
+                            global.MakeDeposit(depositAmount);
                             ShowGlobalSavingsAccountMenu();
                             break;
 
@@ -294,8 +290,7 @@ namespace Bank
                                 b = Console.ReadLine();
                             }
 
-                            double withdrawalamount = double.Parse(b);
-                            global.MakeWithdraw(withdrawalamount);
+                            global.MakeWithdraw(withdrawAmount);
 
                             ShowGlobalSavingsAccountMenu();
                             break;
