@@ -34,8 +34,8 @@ namespace Bank
         public override void MakeDeposit(double amount)
         {
             base.MakeDeposit(amount);
-            Console.WriteLine("You have deposited: " + amount + "$");
-            Console.WriteLine("Curent balance: " + CurrentBalance + "$");
+            Console.WriteLine("You have deposited: " + ToNamFormat.ToNAMoneyFormat(true, amount) + "$");
+            Console.WriteLine("Curent balance: " + ToNamFormat.ToNAMoneyFormat(true, CurrentBalance) + "$");
         }
 
         public override string ToString()

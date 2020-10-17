@@ -49,7 +49,7 @@ namespace Bank
             else
             {
                 base.MakeDeposit(amount);
-                Console.WriteLine("You have deposited: " + amount + "$");
+                Console.WriteLine("You have deposited: " + ToNamFormat.ToNAMoneyFormat(true, amount) + "$");
                 Console.WriteLine("Curent balance: " + CurrentBalance + "$");
             }
         }

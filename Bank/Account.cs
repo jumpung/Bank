@@ -83,10 +83,10 @@ namespace Bank
             
             accountInfo.AppendLine("Percent change: " + ToNamFormat.ToNAMoneyFormat(true, GetPercentageChange()) + "%");
 
-            accountInfo.AppendLine("Monthly interest rate: " + monthlyInterestRate + "%");
-            accountInfo.AppendLine("Monthly interest: " + monthlyInterest + "$");
-            accountInfo.AppendLine("Service charge: " + serviceCharge); 
-            accountInfo.AppendLine("Current balance: " + CurrentBalance + "$");
+            accountInfo.AppendLine("Monthly interest rate: " + ToNamFormat.ToNAMoneyFormat(true, monthlyInterestRate) + "%");
+            accountInfo.AppendLine("Monthly interest: " + ToNamFormat.ToNAMoneyFormat(true, monthlyInterest) + "$");
+            accountInfo.AppendLine("Service charge: " + ToNamFormat.ToNAMoneyFormat(true, serviceCharge)); 
+            accountInfo.AppendLine("Current balance: " + ToNamFormat.ToNAMoneyFormat(true, CurrentBalance) + "$");
 
             withdrawalCount = 0;
             depositCount = 0;

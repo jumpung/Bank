@@ -311,7 +311,7 @@ namespace Bank
 
                         case "D":
                             Console.WriteLine("--------------------------------------------");
-                            Console.WriteLine("Balance in USD " + global.USValue(0.76) + "$");
+                            Console.WriteLine("Balance in USD " + ToNamFormat.ToNAMoneyFormat(true, global.USValue(0.76)) + "$");
                             ShowGlobalSavingsAccountMenu();
                             break;
 
