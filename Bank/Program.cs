@@ -232,7 +232,7 @@ namespace Bank
                             ShowChequingsAccountMenu();
                             break;
                     }
-                    Console.ReadLine();
+                    
 
                 } while (exit == false);
             }
@@ -325,6 +325,7 @@ namespace Bank
                             ShowGlobalSavingsAccountMenu();
                             break;
                     }
+                   
                 } while (exit == false);
             }
             catch (Exception)
